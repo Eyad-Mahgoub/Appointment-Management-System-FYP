@@ -4,11 +4,22 @@
 ---------------------
 */
 
-body {
+.bg-heart-monitor {
     background-image: url('pexels-pixabay-263194.jpg');
-    background-size: 100%;
+    background-size: 100% 100%;
 }
 
+.bg-ddd {
+    background-color: #ddd;
+}
+
+.bg-ccc {
+    background-color: #ccc;
+}
+
+.bg-blue {
+    background-color: #003059;
+}
 
 /*
 ---------------------
@@ -26,25 +37,59 @@ body {
 }
 
 /*
----------------------
-    Classes Stuff
----------------------
+-----------------------
+    Main Page Stuff
+-----------------------
 */
 
-.line-dark {
+.home-mid {
+    width: 80%;
+    padding: 4rem;
+    margin: auto;
+    background-color: rgba(241, 241, 241, 0.8);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #003059;
+}
+
+.line-dark-50 {
+    width: 50%;
+    border: 2px solid #003059;
+    border-radius: 6px;
+}
+/*
+-----------------------
+    Main Page Stuff
+-----------------------
+*/
+/*
+-----------------------
+    Login Page Stuff
+-----------------------
+*/
+
+.line-dark-login {
     width: 20%;
     border: 2px solid #003059;
     border-radius: 6px;
 }
 
-.batates {
+.line-dark-register {
+    width: 25%;
+    border: 2px solid #003059;
+    border-radius: 6px;
+}
+
+.login-page-layout {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 94vh;
 }
 
-.mdi {
+.mid {
     width: 50%;
     /* height: 50%; */
     /* background-color: rgba(241, 241, 241, 0.8); */
@@ -54,20 +99,20 @@ body {
 
 .sec1 {
     width: 20%;
-    padding-top: 6px;
+    /* padding-top: 6px;
     padding-bottom: 20px;
     padding-right: 10px;
-    padding-left: 10px;
+    padding-left: 10px; */
     background-color: #003059;
     color: #ddd;
     border-radius: 6px 0 0 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
 }
 
-.x {
+.seperator-light {
     border-bottom: 4px solid rgba(241,241,241,0.3);
     border-radius: 50%;
     width: 70%;
@@ -82,4 +127,31 @@ body {
     background-color: rgba(241,241,241,0.9);
     color: #003059;
     border-radius: 0 6px 6px 0;
+}
+
+.x {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.x:hover h1{
+    text-shadow: 0 0 10px rgba(241,241,241,0.4);
+}
+
+.text-shadow-light {
+    text-shadow: 0 0 10px rgba(241,241,241,0.4);
+}
+
+.x:hover {
+    cursor: pointer;
+}
+
+.loading {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

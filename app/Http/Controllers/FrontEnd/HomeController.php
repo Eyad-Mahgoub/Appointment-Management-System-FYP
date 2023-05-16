@@ -11,4 +11,19 @@ class HomeController extends Controller
     {
         return view("FrontEnd.home");
     }
+
+    public function doctors()
+    {
+        return view('FrontEnd.doctors');
+    }
+
+    public function services()
+    {
+        return view('FrontEnd.services');
+    }
+
+    public function aboutus()
+    {
+        return view('FrontEnd.about-us');
+    }
 }

@@ -13,5 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\FrontEnd\HomeController::class, 'index']);
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
+Route::controller(\App\Http\Controllers\FrontEnd\HomeController::class)->group(function () {
+    Route::get('/', 'index')                ->name('frontend.home');
+    Route::get('/doctors', 'doctors')       ->name('frontend.doctors');
+    Route::get('/services', 'services')     ->name('frontend.services');
+    Route::get('/about-us', 'about-us')     ->name('frontend.aboutus');
+
+});
+
+
+
+Route::controller(App\Http\Controllers\Auth\LoginController::class)->group(function () {
+    Route::get('/login', 'index')               ->name('frontend.loginpage');
+    Route::post('/login', 'login')              ->name('frontend.login');
+    Route::post('/register', 'register')        ->name('frontend.register');
+    Route::post('/logout', 'logout')            ->name('frontend.logout');
+});

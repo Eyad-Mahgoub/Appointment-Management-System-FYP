@@ -4,7 +4,7 @@
 @section('content')
 <div class="">
     <div class="home-mid mt-5">
-        <h1 class="mb-5 w-100 text-align-left">Home Page</h1>
+        <h1 class="mb-5 w-100 text-align-left">Doctors Page</h1>
         <div class="my-5">
             <h3>Hospital Stuff</h3>
             <img class="rounded w-100 my-3" height="550px" src="{{ asset('frontend/img/hospital-gd8969745a_1920.jpg') }}" alt="" srcset="">

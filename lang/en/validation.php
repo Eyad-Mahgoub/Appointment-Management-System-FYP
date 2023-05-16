@@ -158,6 +158,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'reg_first_name'    => 'first name',
+        'reg_last_name'     => 'last name',
+        'reg_email'         => 'email',
+        'reg_password'      => 'password',
+
+        'login_email'       => 'email',
+        'login_password'    => 'password',
+    ],
 
 ];
