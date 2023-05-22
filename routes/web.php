@@ -40,3 +40,6 @@ Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booki
 // Route for testing purposes only
 
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+Route::post('/test', [\App\Http\Controllers\TestController::class, 'test']);
+Route::post('/testdoc', [\App\Http\Controllers\TestController::class, 'testdoc']);
+Route::post('/testapp', [\App\Http\Controllers\TestController::class, 'testapp']);

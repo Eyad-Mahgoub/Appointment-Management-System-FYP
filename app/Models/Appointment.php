@@ -18,6 +18,7 @@ class Appointment extends Model
         'report_id',
         'date',
         'slot',
+        'status'
     ];
 
     public function doctor()
