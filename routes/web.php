@@ -17,7 +17,7 @@ Route::controller(\App\Http\Controllers\FrontEnd\HomeController::class)->group(f
     Route::get('/', 'index')                ->name('frontend.home');
     Route::get('/doctors', 'doctors')       ->name('frontend.doctors');
     Route::get('/services', 'services')     ->name('frontend.services');
-    Route::get('/about-us', 'about-us')     ->name('frontend.aboutus');
+    Route::get('/about-us', 'aboutus')     ->name('frontend.aboutus');
 
 });
 
@@ -28,4 +28,9 @@ Route::controller(App\Http\Controllers\Auth\LoginController::class)->group(funct
     Route::post('/login', 'login')              ->name('frontend.login');
     Route::post('/register', 'register')        ->name('frontend.register');
     Route::post('/logout', 'logout')            ->name('frontend.logout');
+});
+
+Route::controller(\App\Http\Controllers\Booking\AppointmentController::class)->group(function () {
+    Route::get('/book', 'index')                ->name('booking.index');
+    Route::get('/myappointments', 'myapps')     ->name('booking.appointments');
 });

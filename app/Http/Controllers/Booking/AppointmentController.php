@@ -11,4 +11,9 @@ class AppointmentController extends Controller
     {
         return view('Bookings.index');
     }
+
+    public function myapps()
+    {
+        return view('Bookings.mybookings');
+    }
 }

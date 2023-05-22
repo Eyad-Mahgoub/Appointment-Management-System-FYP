@@ -21,7 +21,7 @@
                 </li>
                 @if (Auth::check() && Auth::user()->role_as == 1)
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Book Appointment</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'booking.index' ? 'active' : '' }}" href="{{ route('booking.index') }}">Book Appointment</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">My Appointments</a>
