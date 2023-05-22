@@ -19,6 +19,22 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">About Us</a>
                 </li>
+                @if (Auth::check() && Auth::user()->role_as == 1)
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Book Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">My Appointments</a>
+                </li>
+                @endif
+                @if (Auth::check() && Auth::user()->role_as == 0)
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Your Appointments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">doctor n shi</a>
+                </li>
+                @endif
             </ul>
 
             @if (Auth::check())

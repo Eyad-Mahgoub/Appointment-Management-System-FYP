@@ -24,15 +24,15 @@ Login
                     <div class="line-dark-login mb-5"></div>
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Email address</label>
-                        <input name="login_email" type="email" class="form-control" id="loginEmail" value="{{ old('email') }}">
-                        @error('login_email')
+                        <input name="email" type="email" class="form-control" id="loginEmail" value="{{ old('email') }}">
+                        @error('email')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="mb-5">
                         <label for="loginPass" class="form-label">Password</label>
-                        <input name="login_password" type="password" class="form-control" id="loginPass">
-                        @error('login_password')
+                        <input name="password" type="password" class="form-control" id="loginPass">
+                        @error('password')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -48,14 +48,14 @@ Login
                         <div class="input-group-prepend">
                         <span class="input-group-text" id="">First and last name</span>
                         </div>
-                        <input type="text" name="reg_first_name" id="regFirstName" class="form-control" value="{{ old('first_name') }}">
-                        <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('last_name') }}">
+                        <input type="text" name="reg_first_name" id="regFirstName" class="form-control" value="{{ old('reg_first_name') }}">
+                        <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
                     </div>
                     <div id="nameHelp" class="form-text text-danger mt-0 mb-3"></div>
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" name="reg_email" class="form-control" id="regEmail" value="{{ old('email') }}">
+                        <input type="email" name="reg_email" class="form-control" id="regEmail" value="{{ old('reg_email') }}">
                         @error('reg_email')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

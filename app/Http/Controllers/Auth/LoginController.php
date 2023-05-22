@@ -25,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('frontend.home');
+            return redirect()->route('frontend.home');
         }
         return redirect()->back()->withInput()->with('error_message', "Email or Password  Incorrect");
     }
@@ -48,7 +48,7 @@ class LoginController extends Controller
 
         if (Auth::check())
         {
-            return redirect('frontend.home');
+            return redirect()->route('frontend.home');
         }
 
         return redirect()->back()->withInput()->with('error_message', 'smn aint right chief');
@@ -59,9 +59,8 @@ class LoginController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('frontend.home');
+        return redirect()->route('frontend.home');
     }
 }
