@@ -30,7 +30,7 @@ Route::controller(App\Http\Controllers\Auth\LoginController::class)->group(funct
     Route::post('/logout', 'logout')            ->name('frontend.logout');
 });
 
-Route::controller(\App\Http\Controllers\Booking\AppointmentController::class)->group(function () {
+Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booking\AppointmentController::class)->group(function () {
     Route::get('/book', 'index')                ->name('booking.index');
     Route::get('/myappointments', 'myapps')     ->name('booking.appointments');
 });
