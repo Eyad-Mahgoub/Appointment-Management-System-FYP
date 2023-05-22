@@ -20,11 +20,11 @@ class Patient extends Model
 
     public function account()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function appointments()
     {
-        return $this->hasMany(Appointment::class, 'patient_id', 'id');
+        return $this->hasMany(Appointment::class, 'id', 'patient_id');
     }
 }

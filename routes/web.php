@@ -34,3 +34,9 @@ Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booki
     Route::get('/book', 'index')                ->name('booking.index');
     Route::get('/myappointments', 'myapps')     ->name('booking.appointments');
 });
+
+
+
+// Route for testing purposes only
+
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);

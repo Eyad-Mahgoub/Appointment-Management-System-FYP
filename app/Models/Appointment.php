@@ -34,6 +34,6 @@ class Appointment extends Model
     }
     public function prescription()
     {
-        return $this->hasMany(Perscription::class, 'appointment_id', 'id');
+        return $this->hasMany(Perscription::class, 'id', 'appointment_id');
     }
 }

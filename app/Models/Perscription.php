@@ -18,12 +18,12 @@ class Perscription extends Model
 
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class, 'id', 'appointment_id');
+        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
     }
 
     public function medicine()
     {
-        return $this->belongsTo(Medicine::class);
+        return $this->belongsTo(Medicine::class, 'medicine_id', 'id');
     }
 
 

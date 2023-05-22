@@ -20,12 +20,12 @@ class Doctor extends Model
 
     public function account()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function speciality()
     {
-        return $this->belongsTo(Speciality::class, 'id', 'speciality_id');
+        return $this->belongsTo(Speciality::class, 'speciality_id', 'id');
     }
 
     public function appointments()

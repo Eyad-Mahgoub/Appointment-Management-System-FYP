@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('perscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('appointment_id')->constrained('appointment', 'id')->cascadeOnDelete();
+            $table->foreignId('appointment_id')->constrained('appointments', 'id')->cascadeOnDelete();
             $table->foreignId('medicine_id')->constrained('medicines', 'id')->cascadeOnDelete();
             $table->timestamps();
         });
