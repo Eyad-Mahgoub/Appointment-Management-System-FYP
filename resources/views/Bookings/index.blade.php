@@ -34,6 +34,9 @@
             <div class="col-2">
                 <button class="w-100 btn btn-primary booking-doctor-back">Back</button>
             </div>
+            <div class="row booking-doctor-child">
+                {{-- TODO --}}
+            </div>
         </div>
 
         <div class="booking-loading mt-5" style="display: none;">
@@ -49,6 +52,9 @@
             <div class="col-2">
                 <button class="w-100 btn btn-primary booking-day-back">Back</button>
             </div>
+            <div class="row booking-day-child">
+                {{-- TODO --}}
+            </div>
         </div>
 
         <div class="booking-slot my-5 row w-100" style="display: none;">
@@ -57,6 +63,9 @@
             </div>
             <div class="col-2">
                 <button class="w-100 btn btn-primary booking-slot-back">Back</button>
+            </div>
+            <div class="row booking-slot-child">
+                {{-- TODO --}}
             </div>
         </div>
     </div>
@@ -89,7 +98,7 @@
             });
 
             $.ajax({
-                url:'/test',
+                url:'/getSpecDocs',
                 data: {
                     'id' : specialityId
                 },
@@ -114,7 +123,7 @@
                                 </div>
                             </div>
                         `;
-                        $('.booking-doctor').append(card);
+                        $('.booking-doctor-child').append(card);
                         $('.booking-spec-doc').text(specialityName +  "'s Doctors")
                     });
                     $(".booking-loading").hide();
@@ -132,18 +141,21 @@
             e.preventDefault();
             $('.booking-doctor').hide();
             $('.booking-speciality').show(400);
+            $('.booking-doctor-child').empty();
         });
 
         $('.booking-day-back').click(function (e) {
             e.preventDefault();
             $('.booking-day').hide();
             $('.booking-doctor').show(400);
+            $('.booking-day-child').empty();
         });
 
         $('.booking-slot-back').click(function (e) {
             e.preventDefault();
             $('.booking-slot').hide();
             $('.booking-day').show(400);
+            $('.booking-slot-child').empty();
         });
 
 
@@ -161,7 +173,7 @@
             });
 
             $.ajax({
-                url:'/testdoc',
+                url:'/getDocApps',
                 data: {
                     'id' : doctorId
                 },
@@ -180,7 +192,7 @@
                                 </div>
                             </div>
                         `;
-                        $('.booking-day').append(card);
+                        $('.booking-day-child').append(card);
                     };
 
 
@@ -217,7 +229,7 @@
                         </div>
                     </div>
                     `;
-                    $('.booking-slot').append(card);
+                    $('.booking-slot-child').append(card);
                 } else {
                     let card = `
                     <div class="slot-data card col-md-4 col-lg-3 col-sm-6 mb-2">
@@ -232,7 +244,7 @@
                         </div>
                     </div>
                     `;
-                    $('.booking-slot').append(card);
+                    $('.booking-slot-child').append(card);
                 }
             }
             $(".booking-loading").hide();
@@ -253,7 +265,7 @@
             });
 
             $.ajax({
-                url:'/testapp',
+                url:'/createApp',
                 data: {
                     'doctor_id' : doctorId,
                     'date' : day,

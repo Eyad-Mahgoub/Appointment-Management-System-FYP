@@ -58,7 +58,10 @@ class TestController extends Controller
 
         foreach ($apps as $app)
         {
-            $data[$app->date][$app->slot]['status'] = 'booked';
+            if (isset($data[$app->date]))
+            {
+                $data[$app->date][$app->slot]['status'] = 'booked';
+            }
         }
 
         return $data;

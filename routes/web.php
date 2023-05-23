@@ -31,8 +31,12 @@ Route::controller(App\Http\Controllers\Auth\LoginController::class)->group(funct
 });
 
 Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booking\AppointmentController::class)->group(function () {
-    Route::get('/book', 'index')                ->name('booking.index');
-    Route::get('/myappointments', 'myapps')     ->name('booking.appointments');
+    Route::get('/book', 'index')                    ->name('booking.index');
+    Route::post('/getSpecDocs', 'getSpecDoctors')   ->name('booking.specDoctors');
+    Route::post('/getDocApps', 'getDocAppointments')->name('booking.docApps');
+    Route::post('/createApp', 'create')             ->name('booking.create');
+
+    Route::get('/myappointments', 'myapps')         ->name('booking.appointments');
 });
 
 
