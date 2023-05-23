@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Speciality;
+use App\Models\User;
 use Database\Factories\DoctorFactory;
+use DateTime;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -14,8 +16,12 @@ class TestController extends Controller
     {
         // $specs = Speciality::factory()->count(10)->create();
         // $doctors = Doctor::factory()->count(20)->create();
-        dd(Appointment::find(1)->date);
-        $specs = Speciality::all();
+
+        $a = new DateTime(date('H:s'));
+        $b = new DateTime('2023-05-24 08:00');
+        $interval = $a->diff($b);
+
+        dd($a, $b, $interval, $interval->format("%H") );
         // dd($specs);
         return view('test.test', compact('specs'));
     }

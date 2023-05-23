@@ -276,9 +276,13 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
-                        text: 'Appointment has been booked.',
+                        confirmButtonText: 'Appointment has been booked.',
                     }).then((result) => {
-                        location.reload()
+                        if (result.isConfirmed) {
+                            location.href = response;
+                        }else if (result.isDenied) {
+                            location.href = response;
+                        }
                     });
 
                     location.reload();

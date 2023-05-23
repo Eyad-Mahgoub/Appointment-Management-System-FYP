@@ -44,15 +44,35 @@ Login
                 <div class="line-dark-register mb-5"></div>
                 <form id="register-form" action="{{ route('frontend.register') }}" method="post">
                     @csrf
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text" id="">First and last name</span>
+                    <h3 class="mb-3">Personal Details:</h3>
+                    <div class="mb-3 row">
+                        <div class="col-6">
+                            <label for="exampleFirstNameInput" class="form-label">First Name</label>
+                            <input type="text" name="reg_first_name" id="regFirstName" class="form-control" value="{{ old('reg_first_name') }}">
                         </div>
-                        <input type="text" name="reg_first_name" id="regFirstName" class="form-control" value="{{ old('reg_first_name') }}">
-                        <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
+                        <div class="col-6">
+                            <label for="exampleLastNameInput" class="form-label">Last Name</label>
+                            <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
+                        </div>
                     </div>
+                    {{-- <div class="mb-3">
+                        <label for="exampleLastNameInput" class="form-label">Last Name</label>
+                        <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
+                    </div> --}}
+                    <div class="mb-3 row">
+                        <div class="col-2">
+                            <label for="exampleLastNameInput" class="form-label">Age</label>
+                            <input type="number" name="reg_age" id="regAge" class="form-control" value="{{ old('reg_age') }}">
+                        </div>
+                        <div class="col-10">
+                            <label for="exampleLastNameInput" class="form-label">Address</label>
+                            <input type="address" name="reg_address" id="regAddress" class="form-control" value="{{ old('reg_address') }}">
+                        </div>
+                    </div>
+
                     <div id="nameHelp" class="form-text text-danger mt-0 mb-3"></div>
 
+                    <h3 class="mb-3 mt-5">Account Details:</h3>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" name="reg_email" class="form-control" id="regEmail" value="{{ old('reg_email') }}">

@@ -24,7 +24,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'booking.index' ? 'active' : '' }}" href="{{ route('booking.index') }}">Book Appointment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">My Appointments</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'booking.appointments' ? 'active' : '' }}" href="{{ route('booking.appointments') }}">My Appointments</a>
                 </li>
                 @endif
                 @if (Auth::check() && Auth::user()->role_as == 0)

@@ -90,11 +90,13 @@ $(document).ready(function () {
         let pass = $('#regPass').val();
         let fname = $('#regFirstName').val();
         let lname = $('#regLastName').val();
+        let age = $('#regAge').val();
+        let address = $('#regAddress').val();
 
         let emailHelp = $('#emailHelp').val();
         let passHelp = $('#passHelp').val();
 
-        if (!email || !fname || !lname || !pass)
+        if (!email || !fname || !lname || !pass || !age || !address)
         {
             // qalert($('#emailHelp').val())
             Swal.fire({

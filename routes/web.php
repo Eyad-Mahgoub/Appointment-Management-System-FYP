@@ -17,7 +17,7 @@ Route::controller(\App\Http\Controllers\FrontEnd\HomeController::class)->group(f
     Route::get('/', 'index')                ->name('frontend.home');
     Route::get('/doctors', 'doctors')       ->name('frontend.doctors');
     Route::get('/services', 'services')     ->name('frontend.services');
-    Route::get('/about-us', 'aboutus')     ->name('frontend.aboutus');
+    Route::get('/about-us', 'aboutus')      ->name('frontend.aboutus');
 
 });
 
@@ -31,12 +31,13 @@ Route::controller(App\Http\Controllers\Auth\LoginController::class)->group(funct
 });
 
 Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booking\AppointmentController::class)->group(function () {
-    Route::get('/book', 'index')                    ->name('booking.index');
-    Route::post('/getSpecDocs', 'getSpecDoctors')   ->name('booking.specDoctors');
-    Route::post('/getDocApps', 'getDocAppointments')->name('booking.docApps');
-    Route::post('/createApp', 'create')             ->name('booking.create');
+    Route::get('/book', 'index')                        ->name('booking.index');
+    Route::post('/getSpecDocs', 'getSpecDoctors')       ->name('booking.specDoctors');
+    Route::post('/getDocApps', 'getDocAppointments')    ->name('booking.docApps');
+    Route::post('/createApp', 'create')                 ->name('booking.create');
 
-    Route::get('/myappointments', 'myapps')         ->name('booking.appointments');
+    Route::get('/myappointments', 'myapps')             ->name('booking.appointments');
+    Route::get('/cancelApp/{app}', 'cancelApp')         ->name('booking.cancel');
 });
 
 

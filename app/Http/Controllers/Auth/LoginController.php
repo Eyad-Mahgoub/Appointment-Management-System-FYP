@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Patient;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
+
         $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
@@ -40,9 +42,18 @@ class LoginController extends Controller
         $user->first_name = $credentials['reg_first_name'];
         $user->last_name = $credentials['reg_last_name'];
         $user->email = $credentials['reg_email'];
+        $user->role_as = 1;
         $user->password = $password;
 
         $user->save();
+
+        $pat = new Patient();
+        $pat->name = $credentials['reg_first_name'] . ' ' . $credentials['reg_last_name'];
+        $pat->user_id = $user->id;
+        $pat->age = $credentials['reg_age'];
+        $pat->address = $credentials['reg_address'];
+
+        $pat->save();
 
         Auth::loginUsingId($user->id);
 

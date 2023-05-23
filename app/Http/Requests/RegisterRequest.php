@@ -26,6 +26,8 @@ class RegisterRequest extends FormRequest
         return [
             'reg_first_name'    => ['required'],
             'reg_last_name'     => ['required'],
+            'reg_age'           => ['required'],
+            'reg_address'       => ['required'],
             'reg_email'         => ['required', 'email'],
             'reg_password'      => ['required'],
         ];
