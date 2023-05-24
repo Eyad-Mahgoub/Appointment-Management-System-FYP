@@ -1,7 +1,7 @@
 @extends('Layouts.FrontEnd.layout')
 
 @section('title')
-
+    My Appointments
 @endsection
 
 @section('content')
