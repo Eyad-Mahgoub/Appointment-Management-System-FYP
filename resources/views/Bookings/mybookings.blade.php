@@ -27,8 +27,8 @@
                 @if ($app->status == 'pending')
                     <a href="{{ route('booking.cancel', ['app' => $app]) }}" class="mx-1 btn btn-danger">Cancel Appointment</a>
                 @elseif ($app->status == 'complete')
-                    <button class="mx-1 btn btn-primary">View Perscription</button>
-                    <button class="mx-1 btn btn-primary">View Report</button>
+                    <a href="{{ route('perscription.download', ['app' => $app]) }}" class="mx-1 btn btn-primary">View Perscription</a>
+                    <a href="{{ route('docRep.download', ['app' => $app]) }}" class="mx-1 btn btn-primary">View Report</a>
                 @else
                 @endif
             </div>

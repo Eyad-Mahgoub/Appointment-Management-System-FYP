@@ -40,11 +40,18 @@ Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booki
     Route::get('/cancelApp/{app}', 'cancelApp')         ->name('booking.cancel');
 });
 
+Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\DoctorReportController::class)->group(function () {
+    Route::get('/downloadDrReport/{app}', 'downloadReport')     ->name('docRep.download');
+});
+
+Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\PerscriptionController::class)->group(function () {
+    Route::get('/downloadPerscription/{app}', 'downloadPerscription')     ->name('perscription.download');
+});
+
 
 
 // Route for testing purposes only
 
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
-Route::post('/test', [\App\Http\Controllers\TestController::class, 'test']);
-Route::post('/testdoc', [\App\Http\Controllers\TestController::class, 'testdoc']);
-Route::post('/testapp', [\App\Http\Controllers\TestController::class, 'testapp']);
+// Route::get('/testdoc', [\App\Http\Controllers\TestController::class, 'testdoc'])->name('prescription.download');
+// Route::get('/testapp', [\App\Http\Controllers\TestController::class, 'testapp'])->name('docRep.download');

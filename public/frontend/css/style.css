@@ -54,8 +54,24 @@
     color: #003059;
 }
 
+.pdf-mid {
+    width: 80%;
+    padding: 4rem;
+    margin: auto;
+    background-color: rgba(241, 241, 241, 0.8);
+    border-radius: 18px;
+    color: #003059;
+    height: 867px;
+}
+
 .line-dark-50 {
     width: 50%;
+    border: 2px solid #003059;
+    border-radius: 6px;
+}
+
+.line-dark-25 {
+    width: 25%;
     border: 2px solid #003059;
     border-radius: 6px;
 }

@@ -31,11 +31,11 @@ class Appointment extends Model
     }
     public function report()
     {
-        return $this->belongsTo(ICUReport::class, 'report_id', 'id');
+        return $this->belongsTo(DoctorReport::class, 'report_id', 'id');
     }
-    public function prescription()
+    public function perscriptions()
     {
-        return $this->hasMany(Perscription::class, 'appointment_id', 'id');
+        return $this->hasMany(Perscription::class);
     }
 
     public function getDayAttribute()
