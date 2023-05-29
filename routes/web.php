@@ -40,6 +40,10 @@ Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booki
     Route::get('/cancelApp/{app}', 'cancelApp')         ->name('booking.cancel');
 });
 
+Route::middleware(['auth', 'isDoctor'])->controller(\App\Http\Controllers\DoctorApp\AppointmentController::class)->group(function () {
+    Route::get('/todayApps', 'index')                   ->name('doctorApp.appointments');
+});
+
 Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\DoctorReportController::class)->group(function () {
     Route::get('/downloadDrReport/{app}', 'downloadReport')     ->name('docRep.download');
 });

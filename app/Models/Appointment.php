@@ -71,4 +71,33 @@ class Appointment extends Model
                 break;
         }
     }
+
+    // public function getIsnowAttribute()
+    // {
+    //     $start_time = 0;
+    //     $end_time = 0;
+    //     switch ($app->slot) {
+    //         case 1:
+    //             $start_time = new DateTime('08:00 AM');
+    //             $end_time = new DateTime('10:00 AM')
+    //             break;
+    //         case 2:
+    //             $start_time = new DateTime('10:00 AM');
+    //             $end_time = new DateTime('12:00 PM');
+    //             break;
+    //         case 3:
+    //             $start_time = new DateTime('12:00 PM');
+    //             $end_time = new DateTime('02:00 PM');
+    //             break;
+    //         case 4:
+    //             $start_time = new DateTime('02:00 AM');
+    //             $end_time = new DateTime('05:00 AM');
+    //             break;
+
+    //     }
+
+    //     $now = new DateTime(strtotime('now'));
+
+    //     if ($now >)
+    // }
 }

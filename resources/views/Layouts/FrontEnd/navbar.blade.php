@@ -29,7 +29,7 @@
                 @endif
                 @if (Auth::check() && Auth::user()->role_as == 0)
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Your Appointments</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'doctorApp.appointments' ? 'active' : '' }}" href="{{ route('doctorApp.appointments') }}">Your Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">doctor n shi</a>
