@@ -19,7 +19,7 @@ class DoctorReportController extends Controller
 
     public function create(Request $request)
     {
-        // try {
+        try {
             $data = $request->validate([
                 'appt_id' => ['required'],
                 'diagnosis' => ['required'],
@@ -33,14 +33,19 @@ class DoctorReportController extends Controller
             $apt->save();
 
             return redirect()->back()->with(['message' => 'Report Registered Successfully']);
-        // }
-        // catch (Exception $e)
-        // {
-        //     return redirect()->back()->with(['error_message' => 'Something went wrong. Please try again later']);
-        // }
+        }
+        catch (Exception $e)
+        {
+            return redirect()->back()->with(['error_message' => 'Something went wrong. Please try again later']);
+        }
     }
 
-    public function edit(Request $request)
+    public function edit(Appointment $appointment)
+    {
+        return ['diagnosis' => $appointment->report->diagnosis];
+    }
+
+    public function store(Request $request)
     {
 
     }

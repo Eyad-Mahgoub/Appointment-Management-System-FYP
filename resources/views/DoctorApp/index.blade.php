@@ -59,7 +59,7 @@
                     @if (!$app->report)
                         <button class="btn btn-primary mx-1 addReport" data-bs-toggle="modal" data-bs-target="#addReport">Add Report</button>
                     @else
-                        <button class="btn btn-primary mx-1 editReport">Edit Report</button>
+                        <button class="btn btn-primary mx-1 editReport" data-bs-toggle="modal" data-bs-target="#editReport">Edit Report</button>
                     @endif
 
                     @if (!$app->perscription)
@@ -90,11 +90,13 @@
 
 </div>
 
+{{-- Add Dr Report --}}
+
 <div class="modal fade" id="addReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Add Report</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -102,7 +104,7 @@
                     @csrf
                     <input type="text" class="addReport-aptId d-none" name="appt_id">
                     <div class="mb-3">
-                        <label class="form-label">Diagnosis address</label>
+                        <label class="form-label">Diagnosis</label>
                         <textarea class="form-control" name="diagnosis" cols="30" rows="10"></textarea>
                     </div>
 
@@ -111,6 +113,43 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary">Save</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{--  --}}
+
+<div class="modal fade" id="editReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="editReportSpinner modal-body">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        {{-- <span class="visually-hidden">Loading...</span> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="editReportModal" style="display: none;">
+                <div class="modal-body">
+                    <form action="{{ route('docReport.store') }}" method="POST">
+                        @csrf
+                        <input type="text" class="addReport-aptId d-none" name="appt_id">
+                        <div class="mb-3">
+                            <label class="form-label">Diagnosis</label>
+                            <textarea class="form-control editReportText" name="diagnosis" cols="30" rows="10"></textarea>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -124,6 +163,32 @@
             let id = $(this).closest('.appointment-options').find('.aptId').val();
             $('.addReport-aptId').val(id);
             console.log($('.addReport-aptId').val());
+        });
+        $(document).on('click', '.editReport', function () {
+            let id = $(this).closest('.appointment-options').find('.aptId').val();
+            $('.editReport-aptId').val(id);
+            console.log($('.addReport-aptId').val());
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url:'/editReport/' + id,
+                type: 'post',
+                success:  function (response) {
+                    console.log(response.diagnosis)
+                    $('.editReportText').val(response.diagnosis);
+                    $(".editReportSpinner").hide();
+                    $(".editReportModal").show(400);
+                },
+                error: function(x,xs,xt){
+                    alert(x);
+
+                }
+            });
         });
     });
 </script>

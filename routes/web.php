@@ -46,8 +46,9 @@ Route::middleware(['auth', 'isDoctor'])->controller(\App\Http\Controllers\Doctor
 
 Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\DoctorReportController::class)->group(function () {
     Route::get('/downloadDrReport/{app}', 'downloadReport')     ->name('docRep.download');
-    Route::get('/createReport', 'create')                      ->name('docReport.create');
-    Route::post('/editReport', 'edit')                          ->name('docReport.edit');
+    Route::post('/createReport', 'create')                      ->name('docReport.create');
+    Route::post('/editReport/{appointment}', 'edit')             ->name('docReport.edit');
+    Route::post('/storeReport', 'store')                        ->name('docReport.store');
 });
 
 Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\PerscriptionController::class)->group(function () {
