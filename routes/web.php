@@ -41,20 +41,22 @@ Route::middleware(['auth', 'isPatient'])->controller(\App\Http\Controllers\Booki
 });
 
 Route::middleware(['auth', 'isDoctor'])->controller(\App\Http\Controllers\DoctorApp\AppointmentController::class)->group(function () {
-    Route::get('/todayApps', 'index')                   ->name('doctorApp.appointments');
+    Route::get('/todayApps', 'index')                               ->name('doctorApp.appointments');
+    Route::get('/concludeAppointment/{appointment}', 'conclude')    ->name('doctorApp.conclude');
 });
 
 Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\DoctorReportController::class)->group(function () {
     Route::get('/downloadDrReport/{app}', 'downloadReport')     ->name('docRep.download');
     Route::post('/createReport', 'create')                      ->name('docReport.create');
-    Route::post('/editReport/{appointment}', 'edit')             ->name('docReport.edit');
+    Route::post('/editReport/{appointment}', 'edit')            ->name('docReport.edit');
     Route::post('/storeReport', 'store')                        ->name('docReport.store');
 });
 
 Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\PerscriptionController::class)->group(function () {
     Route::get('/downloadPerscription/{app}', 'downloadPerscription')     ->name('perscription.download');
-    // Route::post('/createPerscription', 'create')                          ->name('perscription.create');
-    // Route::post('/editPerscription', 'edit')                              ->name('perscription.edit');
+    Route::post('/createPerscription', 'create')                          ->name('perscription.create');
+    Route::post('/getPerscriptions/{appointment}', 'get')                 ->name('perscription.get');
+    Route::get('/deletePerscription/{perscription}', 'delete')          ->name('perscription.delete');
 });
 
 

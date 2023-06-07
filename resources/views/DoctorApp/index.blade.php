@@ -41,20 +41,20 @@
         ?>
         <div class="card w-100 my-2">
             <div class="card-body d-flex justify-content-between align-items-center ">
-                <div class="appointment-info w-25">
+                <div class="appointment-info w-40">
                     <h3>Appointment #{{ $app->id }}</h3>
                     <p>
                         <b>Doctor:</b> {{ $app->doctor->name }} <br>
                         <b>Time:</b> {{ $app->time }}
                     </p>
                 </div>
-                <div class="appointment-status w-50 text-center">
+                <div class="appointment-status w-20 text-center">
 
                     <h4 class="{{ $app->status == 'pending' ? 'text-warning' : ( $app->status == 'complete' ? 'text-success' : 'text-danger' ) }}">{{ $app->status }}</h4>
                 </div>
 
                 @if ($now >= $start_time && $now < $end_time && $app->staus != 'cancelled')
-                <div class="appointment-options w-25 d-flex justify-content-end">
+                <div class="appointment-options w-40 d-flex justify-content-end">
                     <input type="text" class="d-none aptId" id="" value="{{ $app->id }}">
                     @if (!$app->report)
                         <button class="btn btn-primary mx-1 addReport" data-bs-toggle="modal" data-bs-target="#addReport">Add Report</button>
@@ -62,23 +62,25 @@
                         <button class="btn btn-primary mx-1 editReport" data-bs-toggle="modal" data-bs-target="#editReport">Edit Report</button>
                     @endif
 
-                    @if (!$app->perscription)
-                        <button class="btn btn-primary mx-1 addPerscription">Add Perscription</button>
+                    @if ($app->perscriptions->isEmpty())
+                        <button class="btn btn-primary mx-1 addPerscription" data-bs-toggle="modal" data-bs-target="#addPerscription">Add Perscription</button>
                     @else
-                        <button class="btn btn-primary mx-1 editPerscription">Edit Perscription</button>
+                        <button class="btn btn-primary mx-1 addPerscription" data-bs-toggle="modal" data-bs-target="#addPerscription">Edit Perscription</button>
                     @endif
 
-                    <button class="btn {{ !$app->report || !$app->perscription ? "btn-secondary" : 'btn-success'}} mx-1" {{ !$app->report || !$app->perscription ? "disabled" : ''}}>Conclude Appointment</button>
+                    @if ($app->report && !$app->perscriptions->isEmpty() && $app->status == 'pending')
+                        <a href="{{ route('doctorApp.conclude', ['appointment' => $app]) }}" class="btn btn-success mx-1">Conclude Appointment</a>
+                    @endif
                 </div>
                 @elseif ($now < $start_time && $app->status != 'cancelled')
-                <div class="appointment-options w-25 d-flex justify-content-end">
+                <div class="appointment-options w-40 d-flex justify-content-end">
                     <button class="btn btn-danger mx-1">Cancel</button>
                 </div>
                 @elseif ($now > $end_time && $app->status != 'Did Not Attend')
-                <div class="appointment-options w-25 d-flex justify-content-end">
+                <div class="appointment-options w-40 d-flex justify-content-end">
                     <input type="text" class="d-none aptId" id="" value="{{ $app->id }}">
-                    <button class="btn btn-primary mx-1">Edit Perscription</button>
-                    <button class="btn btn-primary mx-1">Edit Report</button>
+                    <button class="btn btn-primary mx-1 editReport" data-bs-toggle="modal" data-bs-target="#editReport">Edit Report</button>
+                    <button class="btn btn-primary mx-1 addPerscription" data-bs-toggle="modal" data-bs-target="#addPerscription">Edit Perscription</button>
                 </div>
                 @endif
             </div>
@@ -118,7 +120,7 @@
     </div>
 </div>
 
-{{--  --}}
+{{-- Edit Dr Report --}}
 
 <div class="modal fade" id="editReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -138,7 +140,7 @@
                 <div class="modal-body">
                     <form action="{{ route('docReport.store') }}" method="POST">
                         @csrf
-                        <input type="text" class="addReport-aptId d-none" name="appt_id">
+                        <input type="text" class="editReport-aptId d-none" name="appt_id">
                         <div class="mb-3">
                             <label class="form-label">Diagnosis</label>
                             <textarea class="form-control editReportText" name="diagnosis" cols="30" rows="10"></textarea>
@@ -154,11 +156,92 @@
         </div>
     </div>
 </div>
+
+{{-- Add Perscription --}}
+
+<div class="modal fade" id="addPerscription" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Perscription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="editPerscriptionSpinner modal-body">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        {{-- <span class="visually-hidden">Loading...</span> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="editPerscriptionModal" style="display: none;">
+                <div class="modal-body addPerscription-details">
+                    <table class="perscriptionTable w-100">
+                        <thead>
+                          <tr>
+                            <th scope="col">Medicine</th>
+                            <th scope="col">Dosage</th>
+                            <th scope="col">More</th>
+                          </tr>
+                        </thead>
+                        <tbody class="perscriptionDetails">
+
+                        </tbody>
+                      </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-target="#addMedicine" data-bs-toggle="modal" data-bs-dismiss="modal">Add Medicine</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Add Medicine --}}
+
+<div class="modal fade" id="addMedicine" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Perscription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="editMedicineModal">
+                <div class="modal-body addPerscription-details">
+                    <form method="post" action="{{ route('perscription.create') }}">
+                        @csrf
+                        <input type="text" class="addMedicine-aptId d-none" name="appt_id">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Medicine</label>
+                            <select class="form-select" name="medicine_id" aria-label="Default select example">
+                                @foreach ($medicines as $medicine)
+                                    <option value="{{ $medicine->id }}">{{ $medicine->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Dosage</label>
+                            <input type="text" name="dosage" id="" class="form-control">
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-target="#addPerscription" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('script')
 <script>
     $(document).ready(function () {
+        // Report Stuff
         $(document).on('click', '.addReport', function () {
             let id = $(this).closest('.appointment-options').find('.aptId').val();
             $('.addReport-aptId').val(id);
@@ -168,6 +251,9 @@
             let id = $(this).closest('.appointment-options').find('.aptId').val();
             $('.editReport-aptId').val(id);
             console.log($('.addReport-aptId').val());
+
+            $(".editReportSpinner").show();
+            $(".editReportModal").hide();
 
             $.ajaxSetup({
                 headers: {
@@ -185,7 +271,47 @@
                     $(".editReportModal").show(400);
                 },
                 error: function(x,xs,xt){
-                    alert(x);
+                    // alert(x);
+
+                }
+            });
+        });
+
+        // Perscription Stuff
+        $(document).on('click', '.addPerscription', function () {
+            let id = $(this).closest('.appointment-options').find('.aptId').val();
+            $('.addMedicine-aptId').val(id);
+
+            $(".editPerscriptionSpinner").show();
+            $(".editPerscriptionModal").hide();
+            $('.perscriptionDetails').empty();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url:'/getPerscriptions/' + id,
+                type: 'post',
+                success:  function (response) {
+                    console.log(response)
+                    response.data.forEach(element => {
+                        let row = $(`
+                        <tr>
+                            <td>${element.name}</td>
+                            <td>${element.dosage}</td>
+                            <td><a href="/deletePerscription/${element.id}" class="btn btn-primary">Delete</a></td>
+                        </tr>
+                        `);
+                        $('.perscriptionDetails').append(row);
+                    });
+                    $(".editPerscriptionSpinner").hide();
+                    $(".editPerscriptionModal").show(400);
+                },
+                error: function(x,xs,xt){
+                    // alert(x);
 
                 }
             });

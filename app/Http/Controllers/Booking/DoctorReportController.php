@@ -47,6 +47,20 @@ class DoctorReportController extends Controller
 
     public function store(Request $request)
     {
+        // try {
+            $data = $request->validate([
+                'appt_id' => ['required'],
+                'diagnosis' => ['required'],
+            ]);
 
+            $apt = Appointment::find($data['appt_id']);
+            $apt->report->diagnosis = $data['diagnosis'];
+            $apt->report->save();
+
+            return redirect()->back()->with(['message' => 'Report Edited Successfully']);
+        // } catch (Exception $e) {
+        //     return redirect()->back()->with(['error_message' => 'Something went wrong. Please try again later']);
+        // }
     }
+
 }

@@ -16,8 +16,8 @@ class TestController extends Controller
 {
     public function index()
     {
-        $app = Appointment::find(2);
-        dd($app, $app->perscriptions);
+        $app = Appointment::find(3);
+        dd(json_encode($app->perscriptions));
     }
 
     public function test(Request $request)
