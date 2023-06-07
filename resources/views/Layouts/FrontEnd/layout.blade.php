@@ -37,6 +37,14 @@
             });
         </script>
         @endif
+        @if (session('message'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "{{ session('message') }}",
+            });
+        </script>
+        @endif
         @yield('script')
     </body>
 </html>

@@ -32,7 +32,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'doctorApp.appointments' ? 'active' : '' }}" href="{{ route('doctorApp.appointments') }}">Your Appointments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">doctor n shi</a>
+                    {{-- <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Wiork in progree</a> --}}
                 </li>
                 @endif
             </ul>

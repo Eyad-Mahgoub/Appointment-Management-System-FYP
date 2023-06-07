@@ -11,7 +11,7 @@ class DoctorReport extends Model
 
     protected $table = 'doctor_reports';
 
-    protected $guarded = [
+    protected $fillable = [
         'diagnosis',
         'icureport_id'
     ];
