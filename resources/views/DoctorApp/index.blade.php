@@ -39,7 +39,7 @@
                 $app->update();
             }
 
-            if ($now >= $start_time && $now < $end_time && $app->staus == AppStatus::PENDING )
+            if ($now >= $start_time && $now < $end_time && $app->status == AppStatus::PENDING )
             {
                 $app->status = AppStatus::ONGOING;
                 $app->update();

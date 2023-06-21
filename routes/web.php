@@ -71,6 +71,19 @@ Route::middleware(['auth', 'isPharmacist'])->controller(\App\Http\Controllers\Ph
     Route::get('/adminster/{appointment}', 'adminster')     ->name('pharmacy.adminster');
 });
 
+Route::prefix('/reception')->middleware(['auth', 'isReceptionist'])->controller(\App\Http\Controllers\Reception\AppointmentController::class)->group(function () {
+    Route::get('/', 'index')                            ->name('reception.index');
+    Route::get('/payment/{appointment}', 'payment')     ->name('reception.payment');
+    Route::get('/cancel/{appointment}', 'cancel')       ->name('reception.cancel');
+});
+
+Route::prefix('/receptionBooking')->middleware(['auth', 'isReceptionist'])->controller(\App\Http\Controllers\Reception\BookingController::class)->group(function () {
+    Route::get('/', 'index')                            ->name('receptionBooking.index');
+    Route::post('/getSpecDocs', 'getSpecDoctors')       ->name('receptionbooking.specDoctors');
+    Route::post('/getDocApps', 'getDocAppointments')    ->name('receptionbooking.docApps');
+    Route::post('/createApp', 'create')                 ->name('receptionbooking.create');
+});
+
 
 // Route for testing purposes only
 

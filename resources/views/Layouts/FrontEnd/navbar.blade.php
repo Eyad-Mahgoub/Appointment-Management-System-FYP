@@ -43,14 +43,14 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'medicine.index' ? 'active' : '' }}" href="{{ route('medicine.index') }}">Medicine</a>
                 </li>
                 @endif
-                {{-- @if (Auth::check() && Auth::user()->role_as == UserRole::RECEPTIONIST)
+                @if (Auth::check() && Auth::user()->role_as == UserRole::RECEPTIONIST)
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'doctorApp.appointments' ? 'active' : '' }}" href="{{ route('doctorApp.appointments') }}">Your Appointments</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'reception.index' ? 'active' : '' }}" href="{{ route('reception.index') }}">Today's Appointments</a>
                 </li>
                 <li class="nav-item">
-                    {{-- <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Wiork in progree</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'receptionBooking.index' ? 'active' : '' }}" href="{{ route('receptionBooking.index') }}">Book An Appointment</a>
                 </li>
-                @endif --}}
+                @endif
 
             </ul>
 
