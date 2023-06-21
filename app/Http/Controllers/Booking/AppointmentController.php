@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Booking;
 
+use App\Enums\AppointmentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Patient;
@@ -26,7 +27,7 @@ class AppointmentController extends Controller
     public function getDocAppointments(Request $request)
     {
         $todate = date("Y-m-d");
-        $apps = Appointment::where('doctor_id', $request->id)->where('status', 'pending')->get();
+        $apps = Appointment::where('doctor_id', $request->id)->where('status', AppointmentStatusEnum::COMPLETE)->get();
         $data = [
             date('Y-m-d', strtotime($todate. ' + 1 days')) => [
                 1 => ['status' => '', 'times' => '8am - 10am'],
@@ -115,7 +116,7 @@ class AppointmentController extends Controller
         if ($difference->format("%H") > 12 || $difference->format("%d") > 0)
         {
             $app->update([
-                'status' => 'cancelled',
+                'status' => AppointmentStatusEnum::CANCELLED,
             ]);
             return redirect()->back()->with(['message' => 'Appointment has been cancelled']);
         }

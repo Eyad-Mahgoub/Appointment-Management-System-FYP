@@ -31,11 +31,17 @@
                     break;
             }
             $now = new DateTime(date('h:i A', strtotime('now')));
-            // $now = new DateTime('03:00 PM');
+            // $now = new DateTime('11:00 AM');
 
-            if ($now > $end_time && $app->status == 'pending')
+            if ($now > $end_time && $app->status == AppStatus::PENDING)
             {
-                $app->status = 'Did Not Attend';
+                $app->status = AppStatus::DIDNOTATTEND;
+                $app->update();
+            }
+
+            if ($now >= $start_time && $now < $end_time && $app->staus == AppStatus::PENDING )
+            {
+                $app->status = AppStatus::ONGOING;
                 $app->update();
             }
         ?>
@@ -50,10 +56,10 @@
                 </div>
                 <div class="appointment-status w-20 text-center">
 
-                    <h4 class="{{ $app->status == 'pending' ? 'text-warning' : ( $app->status == 'complete' ? 'text-success' : 'text-danger' ) }}">{{ $app->status }}</h4>
+                    <h4 class="{{ $app->status == AppStatus::PENDING || $app->status == AppStatus::ONGOING ? 'text-warning' : ( $app->status == AppStatus::COMPLETE ? 'text-success' : 'text-danger' ) }}">{{ $app->status }}</h4>
                 </div>
 
-                @if ($now >= $start_time && $now < $end_time && $app->staus != 'cancelled')
+                @if (($now >= $start_time && $now < $end_time && $app->staus != AppStatus::CANCELLED) || $app->status == AppStatus::COMPLETE)
                 <div class="appointment-options w-40 d-flex justify-content-end">
                     <input type="text" class="d-none aptId" id="" value="{{ $app->id }}">
                     @if (!$app->report)
@@ -68,15 +74,15 @@
                         <button class="btn btn-primary mx-1 addPerscription" data-bs-toggle="modal" data-bs-target="#addPerscription">Edit Perscription</button>
                     @endif
 
-                    @if ($app->report && !$app->perscriptions->isEmpty() && $app->status == 'pending')
+                    @if ($app->report && !$app->perscriptions->isEmpty() && $app->status == AppStatus::ONGOING)
                         <a href="{{ route('doctorApp.conclude', ['appointment' => $app]) }}" class="btn btn-success mx-1">Conclude Appointment</a>
                     @endif
                 </div>
-                @elseif ($now < $start_time && $app->status != 'cancelled')
+                {{-- @elseif ($now < $start_time && ($app->status != AppStatus::CANCELLED && $app->status != AppStatus::COMPLETE))
                 <div class="appointment-options w-40 d-flex justify-content-end">
                     <button class="btn btn-danger mx-1">Cancel</button>
-                </div>
-                @elseif ($now > $end_time && $app->status != 'Did Not Attend')
+                </div> --}}
+                @elseif ($now > $end_time && $app->status != AppStatus::DIDNOTATTEND)
                 <div class="appointment-options w-40 d-flex justify-content-end">
                     <input type="text" class="d-none aptId" id="" value="{{ $app->id }}">
                     <button class="btn btn-primary mx-1 editReport" data-bs-toggle="modal" data-bs-target="#editReport">Edit Report</button>

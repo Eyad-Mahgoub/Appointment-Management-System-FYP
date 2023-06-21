@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AppointmentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use SebastianBergmann\CodeCoverage\Report\Xml\Report;
@@ -19,6 +20,10 @@ class Appointment extends Model
         'date',
         'slot',
         'status'
+    ];
+
+    protected $casts = [
+        'status' => AppointmentStatusEnum::class,
     ];
 
     public function doctor()
