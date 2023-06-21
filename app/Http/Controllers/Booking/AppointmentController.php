@@ -54,6 +54,7 @@ class AppointmentController extends Controller
             ],
         ];
 
+        // Assigns already booked slots
         foreach ($apps as $app)
         {
             if (isset($data[$app->date]))
@@ -116,11 +117,11 @@ class AppointmentController extends Controller
             $app->update([
                 'status' => 'cancelled',
             ]);
-            return redirect()->back()->with(['success' => 'boleh la']);
+            return redirect()->back()->with(['message' => 'Appointment has been cancelled']);
         }
         else
         {
-            return redirect()->back()->with(['fail' => 'Cannot Cancel Appointment 12 Hours beforehand']);
+            return redirect()->back()->with(['error_message' => 'Cannot Cancel Appointment 12 Hours beforehand']);
         }
     }
 }

@@ -47,7 +47,7 @@ class DoctorReportController extends Controller
 
     public function store(Request $request)
     {
-        // try {
+        try {
             $data = $request->validate([
                 'appt_id' => ['required'],
                 'diagnosis' => ['required'],
@@ -58,9 +58,9 @@ class DoctorReportController extends Controller
             $apt->report->save();
 
             return redirect()->back()->with(['message' => 'Report Edited Successfully']);
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with(['error_message' => 'Something went wrong. Please try again later']);
-        // }
+        } catch (Exception $e) {
+            return redirect()->back()->with(['error_message' => 'Something went wrong. Please try again later']);
+        }
     }
 
 }

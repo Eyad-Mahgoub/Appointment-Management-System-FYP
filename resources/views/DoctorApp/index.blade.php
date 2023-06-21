@@ -30,8 +30,8 @@
                     $end_time = new DateTime('05:00 PM');
                     break;
             }
-            // $now = new DateTime(date('h:i A', strtotime('now')));
-            $now = new DateTime('03:00 PM');
+            $now = new DateTime(date('h:i A', strtotime('now')));
+            // $now = new DateTime('03:00 PM');
 
             if ($now > $end_time && $app->status == 'pending')
             {

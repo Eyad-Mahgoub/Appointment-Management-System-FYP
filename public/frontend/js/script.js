@@ -30,7 +30,7 @@ $(document).ready(function () {
         {
             $('#regPass').addClass('border-danger');
             $('#regPass').removeClass('border-success');
-            $('#passHelp').text('Password Length Must be Grater than 8');
+            $('#passHelp').text('Password Length Must be Greater than 8');
         } else {
             $('#regPass').addClass('border-success');
             $('#regPass').removeClass('border-danger');
@@ -93,12 +93,10 @@ $(document).ready(function () {
         let age = $('#regAge').val();
         let address = $('#regAddress').val();
 
-        let emailHelp = $('#emailHelp').val();
-        let passHelp = $('#passHelp').val();
+
 
         if (!email || !fname || !lname || !pass || !age || !address)
         {
-            // qalert($('#emailHelp').val())
             Swal.fire({
                 icon: 'error',
                 title: 'Registration not Successful',
@@ -107,6 +105,25 @@ $(document).ready(function () {
             return;
         }
 
+        if (!isEmail(email))
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration not Successful',
+                text: 'Please enter a valid email',
+            });
+            return;
+        }
+
+        if (pass.length < 8)
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration not Successful',
+                text: 'Password must be more than 8 characters',
+            });
+            return;
+        }
 
         $('.register').hide();
         $('.loading').show();

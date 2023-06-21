@@ -62,7 +62,7 @@ class LoginController extends Controller
             return redirect()->route('frontend.home');
         }
 
-        return redirect()->back()->withInput()->with('error_message', 'smn aint right chief');
+        return redirect()->back()->withInput()->with('error_message', 'Something Went Wrong');
     }
 
     public function logout(Request $request)

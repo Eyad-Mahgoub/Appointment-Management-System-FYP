@@ -28,8 +28,8 @@ class RegisterRequest extends FormRequest
             'reg_last_name'     => ['required'],
             'reg_age'           => ['required'],
             'reg_address'       => ['required'],
-            'reg_email'         => ['required', 'email'],
-            'reg_password'      => ['required'],
+            'reg_email'         => ['required', 'email', 'unique:users,email'],
+            'reg_password'      => ['required', 'min:8'],
         ];
     }
 }

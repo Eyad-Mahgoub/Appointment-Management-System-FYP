@@ -200,10 +200,6 @@
                     $(".booking-loading").hide();
                     $(".booking-day").show(400);
                 },
-                error: function(x,xs,xt){
-                    alert(x);
-
-                }
             });
         });
 
@@ -216,6 +212,7 @@
             console.log(appData[day]);
             for (slot in appData[day]){
                 if (appData[day][slot].status == 'booked') {
+                    // If the Slot is Booked
                     let card = `
                     <div class="slot-data card col-md-4 col-lg-3 col-sm-6 mb-2">
                         <div class="d-none slot-no">${slot}</div>
@@ -231,6 +228,7 @@
                     `;
                     $('.booking-slot-child').append(card);
                 } else {
+                    // Slot is not Booked
                     let card = `
                     <div class="slot-data card col-md-4 col-lg-3 col-sm-6 mb-2">
                         <div class="d-none slot-no">${slot}</div>

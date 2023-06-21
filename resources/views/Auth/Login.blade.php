@@ -55,10 +55,6 @@ Login
                             <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
                         </div>
                     </div>
-                    {{-- <div class="mb-3">
-                        <label for="exampleLastNameInput" class="form-label">Last Name</label>
-                        <input type="text" name="reg_last_name" id="regLastName" class="form-control" value="{{ old('reg_last_name') }}">
-                    </div> --}}
                     <div class="mb-3 row">
                         <div class="col-2">
                             <label for="exampleLastNameInput" class="form-label">Age</label>
