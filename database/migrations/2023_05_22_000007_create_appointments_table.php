@@ -23,6 +23,8 @@ return new class extends Migration
             $table->date('date');
             $table->tinyInteger('slot');
             $table->string('status')->default(AppointmentStatusEnum::PENDING);
+            $table->tinyInteger('is_administered')->default(0);
+            $table->tinyInteger('is_paid')->default(0);
             $table->timestamps();
         });
     }

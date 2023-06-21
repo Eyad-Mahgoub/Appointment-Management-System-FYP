@@ -195,6 +195,7 @@ return [
         // ...
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'AppStatus' => \App\Enums\AppointmentStatusEnum::class,
+        'UserRole' => \App\Enums\UserRoleEnum::class,
     ])->toArray(),
 
 ];

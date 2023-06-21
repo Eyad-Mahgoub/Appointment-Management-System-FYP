@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Medicine extends Model
+class Receptionist extends Model
 {
     use HasFactory;
 
-    protected $table = 'medicines';
+    protected $table = 'receptionists';
 
     protected $fillable = [
         'name',
-        'quantity',
-        'price'
+        'user_id',
     ];
+
+    public function account()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

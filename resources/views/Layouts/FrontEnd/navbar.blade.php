@@ -19,7 +19,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">About Us</a>
                 </li>
-                @if (Auth::check() && Auth::user()->role_as == 1)
+                @if (Auth::check() && Auth::user()->role_as == UserRole::PATIENT)
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'booking.index' ? 'active' : '' }}" href="{{ route('booking.index') }}">Book Appointment</a>
                 </li>
@@ -27,7 +27,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'booking.appointments' ? 'active' : '' }}" href="{{ route('booking.appointments') }}">My Appointments</a>
                 </li>
                 @endif
-                @if (Auth::check() && Auth::user()->role_as == 0)
+                @if (Auth::check() && Auth::user()->role_as == UserRole::DOCTOR)
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'doctorApp.appointments' ? 'active' : '' }}" href="{{ route('doctorApp.appointments') }}">Your Appointments</a>
                 </li>
@@ -35,6 +35,23 @@
                     {{-- <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Wiork in progree</a> --}}
                 </li>
                 @endif
+                @if (Auth::check() && Auth::user()->role_as == UserRole::PHARMACIST)
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'pharmacy.index' ? 'active' : '' }}" href="{{ route('pharmacy.index') }}">Pharmacy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'medicine.index' ? 'active' : '' }}" href="{{ route('medicine.index') }}">Medicine</a>
+                </li>
+                @endif
+                {{-- @if (Auth::check() && Auth::user()->role_as == UserRole::RECEPTIONIST)
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'doctorApp.appointments' ? 'active' : '' }}" href="{{ route('doctorApp.appointments') }}">Your Appointments</a>
+                </li>
+                <li class="nav-item">
+                    {{-- <a class="nav-link {{ Route::currentRouteName() == 'frontend.aboutus' ? 'active' : '' }}" href="{{ route('frontend.aboutus') }}">Wiork in progree</a>
+                </li>
+                @endif --}}
+
             </ul>
 
             @if (Auth::check())

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRoleEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class DoctorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_as == 0)
+        if (Auth::user()->role_as == UserRoleEnum::DOCTOR)
         {
             return $next($request);
         }

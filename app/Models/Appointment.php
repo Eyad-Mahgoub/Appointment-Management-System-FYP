@@ -19,7 +19,8 @@ class Appointment extends Model
         'report_id',
         'date',
         'slot',
-        'status'
+        'status',
+        'is_administered'
     ];
 
     protected $casts = [

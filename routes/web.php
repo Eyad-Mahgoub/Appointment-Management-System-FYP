@@ -56,13 +56,24 @@ Route::middleware(['auth'])->controller(\App\Http\Controllers\Booking\Perscripti
     Route::get('/downloadPerscription/{app}', 'downloadPerscription')     ->name('perscription.download');
     Route::post('/createPerscription', 'create')                          ->name('perscription.create');
     Route::post('/getPerscriptions/{appointment}', 'get')                 ->name('perscription.get');
-    Route::get('/deletePerscription/{perscription}', 'delete')          ->name('perscription.delete');
+    Route::get('/deletePerscription/{perscription}', 'delete')            ->name('perscription.delete');
 });
 
+Route::prefix('/medicine')->middleware(['auth', 'isPharmacist'])->controller(\App\Http\Controllers\Pharmacy\MedicineController::class)->group(function() {
+    Route::get('/', 'index')                                ->name('medicine.index');
+    Route::post('/create', 'create')                        ->name('medicine.create');
+    Route::post('/update', 'update')                        ->name('medicine.update');
+    Route::get('/delete/{medicine}', 'delete')              ->name('medicine.delete');
+});
+
+Route::middleware(['auth', 'isPharmacist'])->controller(\App\Http\Controllers\Pharmacy\PharmacyController::class)->group(function() {
+    Route::get('/pharmacy', 'index')                        ->name('pharmacy.index');
+    Route::get('/adminster/{appointment}', 'adminster')     ->name('pharmacy.adminster');
+});
 
 
 // Route for testing purposes only
 
-Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+// Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 // Route::get('/testdoc', [\App\Http\Controllers\TestController::class, 'testdoc'])->name('prescription.download');
 // Route::get('/testapp', [\App\Http\Controllers\TestController::class, 'testapp'])->name('docRep.download');

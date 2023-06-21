@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PatientMiddleware
+class PharmacistMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class PatientMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_as == UserRoleEnum::PATIENT)
+        if (Auth::user()->role_as == UserRoleEnum::PHARMACIST)
         {
             return $next($request);
         }

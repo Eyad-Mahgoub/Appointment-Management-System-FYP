@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AppointmentStatusEnum;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Perscription;
@@ -16,8 +17,8 @@ class TestController extends Controller
 {
     public function index()
     {
-        $app = Appointment::find(3);
-        dd(json_encode($app->perscriptions));
+        $appointments = Appointment::where('status', AppointmentStatusEnum::COMPLETE)->where('is_administered', 0)->get();
+        return view('Pharmacy.index', compact('appointments'));
     }
 
     public function test(Request $request)

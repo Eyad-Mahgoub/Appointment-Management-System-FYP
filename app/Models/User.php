@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,11 +42,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role_as' => UserRoleEnum::class,
     ];
 
     public function details()
     {
-        if ($this->role_as == 0) return $this->hasOne(Doctor::class, 'user_id', 'id');
+        if ($this->role_as == UserRoleEnum::DOCTOR) return $this->hasOne(Doctor::class, 'user_id', 'id');
+        if ($this->role_as == UserRoleEnum::PHARMACIST) return $this->hasOne(Pharmacist::class, 'user_id', 'id');
+        if ($this->role_as == UserRoleEnum::RECEPTIONIST) return $this->hasOne(Receptionist::class, 'user_id', 'id');
         else return $this->hasOne(Patient::class, 'user_id');
     }
 }

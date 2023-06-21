@@ -18,6 +18,7 @@ class PerscriptionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->medicine->name,
             'dosage' => $this->dosage,
+            'price' => $this->medicine->price,
             'appointment_id' => $this->appointment_id,
         ];
     }
