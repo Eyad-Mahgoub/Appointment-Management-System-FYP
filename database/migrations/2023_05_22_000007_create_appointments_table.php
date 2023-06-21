@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors', 'id')->cascadeOnDelete();
             $table->foreignId('patient_id')->constrained('patients', 'id')->cascadeOnDelete();
             // $table->foreignId('perscription_id')->constrained('perscriptions', 'id');
-            $table->foreignId('report_id')->constrained('icureports', 'id');
+            $table->foreignId('report_id')->constrained('icureports', 'id')->nullable();
             $table->date('date');
             $table->tinyInteger('slot');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('doctor_reports', function (Blueprint $table) {
             $table->id();
             $table->string('diagnosis');
-            $table->foreignId('icureport_id')->constrained('icureports', 'id')->nullable();
+            // $table->foreignId('icureport_id')->constrained('icureports', 'id')->nullable();
             $table->timestamps();
         });
     }
