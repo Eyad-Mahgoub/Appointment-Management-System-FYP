@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Booking;
 use App\Enums\AppointmentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\AppointmentInvoice;
 use App\Models\Patient;
 use App\Models\Speciality;
 use DateTime;
@@ -69,12 +70,22 @@ class AppointmentController extends Controller
 
     public function create(Request $request)
     {
-        Appointment::create([
+        $app = Appointment::create([
             'doctor_id' => $request->doctor_id,
-            'patient_id' => Auth::user()->id,
+            'patient_id' => Auth::user()->details->id,
             'date' => $request->date,
             'slot' => $request->slot,
+            'is_paid' => $request->is_paid ?? 0,
         ]);
+
+        if ($request->is_paid)
+        {
+            AppointmentInvoice::create([
+                'appointment_id' => $app->id,
+                'patient_id' => Auth::user()->details->id,
+                'amount' => 100,
+            ]);
+        }
 
         return '/book';
     }
